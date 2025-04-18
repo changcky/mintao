@@ -1,0 +1,26 @@
+{
+  "manifest_version": 2,
+  "name": "网页元素屏蔽器",
+  "version": "1.0",
+  "description": "屏蔽网页上特定元素的Chrome扩展",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "<all_urls>"
+  ],
+  "browser_action": {
+    "default_popup": "popup.html"
+
+  },
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

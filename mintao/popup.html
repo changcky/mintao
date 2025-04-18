@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>网页元素屏蔽器</title>
+  <style>
+    body {
+      width: 350px;
+      padding: 10px;
+      font-family: Arial, sans-serif;
+    }
+    h1 {
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+    h2 {
+      font-size: 16px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    .form-group {
+      margin-bottom: 10px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 5px;
+      box-sizing: border-box;
+    }
+    textarea {
+      height: 60px;
+      resize: vertical;
+    }
+    button {
+      padding: 5px 10px;
+      margin-right: 10px;
+      background-color: #4285f4;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #3367d6;
+    }
+    .rules-container {
+      margin-top: 20px;
+      max-height: 200px;
+      overflow-y: auto;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+    }
+    .rule-item {
+      padding: 8px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .rule-info {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .rule-actions {
+      display: flex;
+    }
+    .edit-button {
+      background-color: #4CAF50;
+      margin-right: 5px;
+    }
+    .delete-button {
+      background-color: #f44336;
+    }
+    .rule-actions button {
+      padding: 3px 8px;
+      font-size: 12px;
+    }
+    #cancelEdit {
+      background-color: #9e9e9e;
+    }
+    .rule-url {
+      font-weight: bold;
+      margin-bottom: 3px;
+    }
+    .rule-selector {
+      font-size: 12px;
+      color: #666;
+    }
+    .pick-element {
+      background-color: #ff9800;
+    }
+    .import-export {
+      margin-top: 15px;
+      padding-top: 10px;
+      border-top: 1px solid #ccc;
+    }
+    .import-export-buttons {
+      display: flex;
+      margin-top: 10px;
+    }
+    #importRules {
+      background-color: #673ab7;
+    }
+    #exportRules {
+      background-color: #009688;
+    }
+    .hidden {
+      display: none;
+    }
+    #importFile {
+      margin-top: 10px;
+    }
+    .import-json {
+      margin-top: 10px;
+    }
+    #importJsonText {
+      height: 100px;
+    }
+  </style>
+</head>
+<body>
+  <h1>网页元素屏蔽器</h1>
+  <div class="form-group">
+    <label for="urlPattern">URL模式:</label>
+    <input type="text" id="urlPattern" placeholder="输入要匹配的URL或网址（例如：https://example.com/page）">
+  </div>
+<div class="form-group">
+  <label for="elementSelector">CSS选择器:</label>
+  <textarea id="elementSelector" placeholder="输入要屏蔽的元素CSS选择器
+示例: 
+1. div.advertisement, #sidebar, .ad-banner (使用逗号分隔多个选择器)
+2. #main > .sponsored-content (选择直接子元素)
+3. .article .inline-ad (选择嵌套元素)
+4. &lt;div class=\&quot;col-sm\&quot;&gt; (使用HTML标签格式)"></textarea>
+</div>
+  <div class="form-buttons">
+    <button id="pickElement" class="pick-element">选择元素</button>
+    <button id="addRule">添加规则</button>
+    <button id="clearFields">清空</button>
+  </div>
+
+  <div class="rules-container">
+    <h2>已保存的规则</h2>
+    <div id="rulesList"></div>
+  </div>
+
+  <div class="import-export">
+    <h2>导入/导出规则</h2>
+    <div class="import-export-buttons">
+      <button id="importRules">导入规则</button>
+      <button id="exportRules">导出规则</button>
+    </div>
+    
+    <div id="importOptions" class="hidden">
+      <div class="form-group">
+        <input type="file" id="importFile" accept=".json">
+      </div>
+      <div class="import-json">
+        <label for="importJsonText">或粘贴JSON规则:</label>
+        <textarea id="importJsonText" placeholder="粘贴JSON格式的规则数据"></textarea>
+        <button id="confirmImport">确认导入</button>
+        <button id="cancelImport">取消</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
